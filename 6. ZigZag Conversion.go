@@ -19,13 +19,12 @@ func convert(s string, numRows int) string {
 		tmp = append(tmp, chars[index])
 		stride = 2*(numRows-index%(2*numRows-2)) - 2
 		for {
-			if stride != 0 {
-				index += stride
-				stride = 2*numRows - 2 - stride
-			} else {
+			index += stride
+			if stride == 0 {
 				stride = 2*numRows - 2 - stride
 				continue
 			}
+			stride = 2*numRows - 2 - stride
 			if index >= length {
 				break
 			}
@@ -33,8 +32,4 @@ func convert(s string, numRows int) string {
 		}
 	}
 	return strings.Join(tmp, "")
-}
-
-func main() {
-	println(convert("A", 1))
 }
